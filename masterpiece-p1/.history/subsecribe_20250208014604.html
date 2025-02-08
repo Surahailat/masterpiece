@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Section</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .plan {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 320px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .plan-price {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .plan-price h3 {
+            font-size: 24px;
+            color: #333;
+            margin: 0;
+        }
+
+        .plan-price .value {
+            font-size: 40px;
+            color: #ff4e50;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .plan-price .period {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .plan-featured .plan-price {
+            background-color: #ff4e50;
+            color: #fff;
+        }
+
+        .plan-featured .plan-price .value {
+            color: #fff;
+        }
+
+        .plan-featured .plan-price .period {
+            color: #fff;
+        }
+
+        .plan-featured .listing-badge {
+            position: absolute;
+            top: 20px;
+            right: -45px;
+            background: #ff4e50;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 50px;
+            text-transform: uppercase;
+            transform: rotate(45deg);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .plan-featured .listing-badge span {
+            display: block;
+        }
+
+        .plan-features {
+            padding: 20px;
+        }
+
+        .plan-features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .plan-features ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .plan-features ul li:last-child {
+            border-bottom: none;
+        }
+
+        .plan a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #ff4e50;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .plan a:hover {
+            background-color: #d1403f;
+        }
+
+        .plan-featured a {
+            background-color: #fff;
+            color: #ff4e50;
+            border: 2px solid #ff4e50;
+        }
+
+        .plan-featured a:hover {
+            background-color: #ff4e50;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="pricing-container">
+        <!-- Basic Plan -->
+        <div class="plan">
+            <div class="plan-price">
+                <h3>Basic</h3>
+                <div class="value">Free</div>
+                <div class="period">Free of charge one standard listing active for 90 days</div>
+            </div>
+            <div class="plan-features">
+                <ul>
+                    <li>One Listing</li>
+                    <li>90 Days Availability</li>
+                    <li>Non-Featured</li>
+                    <li>Limited Support</li>
+                </ul>
+                <a href="#">Get Started</a>
+            </div>
+        </div>
+
+        <!-- Extended Plan -->
+        <div class="plan plan-featured">
+            <div class="listing-badge"><span>Featured</span></div>
+            <div class="plan-price">
+                <h3>Extended</h3>
+                <div class="value">$9</div>
+                <div class="period">One time fee for one listing, highlighted in search results</div>
+            </div>
+            <div class="plan-features">
+                <ul>
+                    <li>One Time Fee</li>
+                    <li>One Listing</li>
+                    <li>Lifetime Availability</li>
+                    <li>Featured In Search Results</li>
+                    <li>24/7 Support</li>
+                </ul>
+                <a href="#">Get Started</a>
+            </div>
+        </div>
+
+        <!-- Professional Plan -->
+        <div class="plan">
+            <div class="plan-price">
+                <h3>Professional</h3>
+                <div class="value">$59</div>
+                <div class="period">Monthly subscription for unlimited listings and lifetime availability</div>
+            </div>
+            <div class="plan-features">
+                <ul>
+                    <li>Unlimited Listings</li>
+                    <li>Lifetime Availability</li>
+                    <li>Featured In Search Results</li>
+                    <li>24/7 Support</li>
+                </ul>
+                <a href="#">Get Started</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
