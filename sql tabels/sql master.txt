@@ -1,0 +1,101 @@
+-- جدول المستخدمين
+CREATE TABLE Users (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Username VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) UNIQUE NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Date_of_Birth DATE NULL,
+    Gender VARCHAR(10) CHECK (Gender IN ('Male', 'Female')) NULL,
+    Height FLOAT NULL,
+    Weight FLOAT NULL,
+    Age INT NULL,
+    Medical_Conditions TEXT NULL,
+    Country VARCHAR(200) NULL,
+    City VARCHAR(255) NULL,
+    Phone VARCHAR(20) UNIQUE NULL
+);
+
+-- جدول المنتجات
+CREATE TABLE Products (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(255) NOT NULL,
+    Price DECIMAL(10,2) NOT NULL CHECK (Price >= 0),
+    StockQuantity INT DEFAULT 0 CHECK (StockQuantity >= 0) 
+);
+
+-- جدول سلة التسوق
+CREATE TABLE Cart (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    ProductID INT NOT NULL,
+    Quantity INT NOT NULL CHECK (Quantity > 0),
+    AddedAt DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (UserID) REFERENCES Users(ID) ON DELETE CASCADE,
+    FOREIGN KEY (ProductID) REFERENCES Products(ID) ON DELETE CASCADE
+);
+
+-- جدول الطلبات
+CREATE TABLE Orders (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    TotalAmount DECIMAL(10,2) NOT NULL CHECK (TotalAmount >= 0),
+    OrderStatus VARCHAR(20) CHECK (OrderStatus IN ('Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled')) DEFAULT 'Pending',
+    OrderDate DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (UserID) REFERENCES Users(ID) ON DELETE CASCADE
+);
+
+-- جدول المدفوعات
+CREATE TABLE Payments (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    OrderID INT NOT NULL,
+    UserID INT NOT NULL,
+    PaymentMethod VARCHAR(50) NOT NULL,
+    PaymentStatus VARCHAR(20) CHECK (PaymentStatus IN ('Pending', 'Completed', 'Failed', 'Refunded')) DEFAULT 'Pending',
+    Amount DECIMAL(10,2) NOT NULL CHECK (Amount >= 0),
+    PaymentDate DATETIME DEFAULT GETDATE(),
+    TransactionID VARCHAR(100) UNIQUE NULL,
+    FOREIGN KEY (OrderID) REFERENCES Orders(ID) ON DELETE CASCADE,
+    FOREIGN KEY (UserID) REFERENCES Users(ID) ON DELETE CASCADE
+);
+
+-- جدول الاشتراكات
+CREATE TABLE Subscription (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(255) NOT NULL,
+    Price DECIMAL(10,2) NOT NULL,
+    DurationInDays INT NOT NULL CHECK (DurationInDays > 0)
+);
+
+-- جدول الاشتراكات للمستخدمين (جدول وسيط بين Users و Subscription)
+CREATE TABLE UserSubscribe (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL,
+    SubscriptionID INT NOT NULL,
+    StartDate DATETIME DEFAULT GETDATE(),
+    EndDate DATETIME NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES Users(ID) ON DELETE CASCADE,
+    FOREIGN KEY (SubscriptionID) REFERENCES Subscription(ID) ON DELETE CASCADE
+);
+
+-- جدول الوصفات
+CREATE TABLE Recipes (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(255) NOT NULL,
+    Rate FLOAT DEFAULT 0 CHECK (Rate >= 0 AND Rate <= 5),
+    Serving_Size VARCHAR(50) NULL,
+    Calories_Total INT NULL,
+    Carbohydrate FLOAT NULL,
+    Total_Fat FLOAT NULL,
+    Protein FLOAT NULL,
+    Image_URL VARCHAR(255) NULL
+);
+
+-- جدول الاتصال
+CREATE TABLE Contact (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    First_Name VARCHAR(255) NOT NULL,
+    Last_Name VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    Subject VARCHAR(255) NOT NULL,
+    Message TEXT NOT NULL
+);
